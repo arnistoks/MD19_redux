@@ -11,7 +11,9 @@ const App = () => (
   <div className="App">
     <Router>
       <header className="header">
-        <div className="logo">
+        <div
+          className="logo"
+        >
           <img src={Logo} alt="Logo" width="150" />
         </div>
         <nav className="navigation">

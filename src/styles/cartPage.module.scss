@@ -1,0 +1,20 @@
+.container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.title {
+  font-size: 30px;
+  margin-top: 0;
+}
+
+.container__total {
+  max-width: 1200px;
+  width: 70%;
+  text-align: right;
+}
