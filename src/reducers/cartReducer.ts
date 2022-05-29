@@ -5,8 +5,6 @@ export const cartSlice = createSlice({
   name: 'shop',
   initialState: {
     items: lawnmowers,
-    total: 0,
-    totalPrice: 0,
   },
   reducers: {
     increaseCount: (state, action) => {
