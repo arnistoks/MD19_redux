@@ -1,31 +1,74 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Lawnmower } from '../data/data';
+import lawnmowers from '../data/data';
 
 export const cartSlice = createSlice({
-  name: 'cart',
+  name: 'shop',
   initialState: {
-    value: [] as Lawnmower[],
+    items: lawnmowers,
+    total: 0,
+    totalPrice: 0,
   },
   reducers: {
-    addItem: (state:{value: Lawnmower[]}, action: {payload: Lawnmower}) => {
-      state.value = [...state.value, action.payload];
+    increaseCount: (state, action) => {
+      state.items = state.items.map((i) => {
+        if (i.id === action.payload) {
+          i.count += 1;
+        }
+        return i;
+      });
     },
-    plusItem: (state:{value: Lawnmower[]}, action: {payload: number}) => {
-      // @ts-ignore
-      state.value.find((element) => element.id === action.payload).quantity += 1;
+    decreaseCount: (state, action) => {
+      state.items = state.items.map((i) => {
+        if (i.id === action.payload) {
+          i.count -= 1;
+        } return i;
+      });
     },
-    minusItem: (state:{value: Lawnmower[]}, action: {payload: number}) => {
-      // @ts-ignore
-      state.value.find((element) => element.id === action.payload).quantity -= 1;
+    increaseQuantity: (state, action) => {
+      state.items = state.items.map((i) => {
+        if (i.id === action.payload) {
+          i.quantity += 1;
+        }
+        return i;
+      });
     },
-    removeItem: (state:{value: Lawnmower[]}, action: {payload: number}) => {
-      state.value.slice(action.payload, 1);
+    decreaseQuantity: (state, action) => {
+      state.items = state.items.map((i) => {
+        if (i.id === action.payload) {
+          i.quantity -= 1;
+        } return i;
+      });
+    },
+    addToCart: (state, action) => {
+      state.items = state.items.map((i) => {
+        if (i.id === action.payload) {
+          i.inCart = true;
+          i.quantity += i.count;
+        }
+        return i;
+      });
+    },
+    removeFromCart(state, action) {
+      state.items.map((i) => {
+        if (i.id === action.payload) {
+          i.inCart = false;
+          i.quantity = 0;
+        }
+        return i;
+      });
+    },
+    resetCount(state, action) {
+      state.items.map((i) => {
+        if (i.id === action.payload) {
+          i.count = 1;
+        } return i;
+      });
     },
   },
 });
 
 export const {
-  addItem, plusItem, minusItem, removeItem,
+  increaseCount, decreaseCount, increaseQuantity, decreaseQuantity, addToCart, removeFromCart, resetCount,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

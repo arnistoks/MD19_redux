@@ -1,22 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../app/store';
-import { addItem } from '../../reducers/cartReducer';
+import { Lawnmower } from '../../data/data';
+import {
+  increaseCount, decreaseCount, addToCart, resetCount,
+} from '../../reducers/cartReducer';
 import styles from '../../styles/catalogueCard.module.scss';
-import { getLawnmowerById } from '../../data/data';
 
-type CatalogueCardProps = {
-  id: number;
-  name: string;
-  price: number;
-  imgSrc: string;
-  quantity: number;
-}
-
-const CatalogueCard:FC<CatalogueCardProps> = ({
-  id, name, price, imgSrc, quantity,
+const CatalogueCard:FC<Lawnmower> = ({
+  id, name, price, imgSrc, quantity, count,
 }) => {
-  const [buyQuantity, setBuyQuantity] = useState(quantity);
   const dispatch = useDispatch<AppDispatch>();
 
   return (
@@ -33,26 +26,30 @@ const CatalogueCard:FC<CatalogueCardProps> = ({
         <div className={styles.counter}>
           <button
             className={styles.incrementOrDecrement}
-            onClick={() => setBuyQuantity(buyQuantity - 1)}
-            disabled={buyQuantity === 1}
+            disabled={count === 1}
+            onClick={() => {
+              dispatch(decreaseCount(id));
+            }}
           >
             -
           </button>
-          <span>{buyQuantity}</span>
+          <span>{count}</span>
           <button
             className={styles.incrementOrDecrement}
-            onClick={() => setBuyQuantity(buyQuantity + 1)}
-            disabled={buyQuantity === 10}
+            disabled={count + quantity >= 10}
+            onClick={() => {
+              dispatch(increaseCount(id));
+            }}
           >
             +
           </button>
         </div>
         <button
           className={styles.add}
+          disabled={quantity >= 10}
           onClick={() => {
-            // @ts-ignore
-            dispatch(addItem({ ...getLawnmowerById(id), quantity: buyQuantity }));
-            setBuyQuantity(1);
+            dispatch(addToCart(id));
+            dispatch(resetCount(id));
           }}
         >
           Add to cart

@@ -1,23 +1,24 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
 import CartCard from '../../components/CartCard/CartCard';
+import { RootState } from '../../app/store';
 import styles from '../../styles/cartPage.module.scss';
 
 const CartPage = () => {
-  const cartItems = useSelector((state: RootState) => state.cartItems.value);
+  const cart = useSelector((state: RootState) => state.cartItems.items);
+  const itemsToBuy = cart.filter((item) => item.inCart === true);
 
-  const totalPrice = cartItems
-    .map(({ price, quantity }) => price * quantity)
-    .reduce((a, b) => a + b, 0)
-    .toFixed(2);
+  const totalPrice = itemsToBuy.length !== 0
+      && itemsToBuy.map((e) => e.price * e.quantity).reduce((a, b) => a + b).toFixed(2);
 
   return (
     <section className="section">
-      <h1 className={styles.title}>Your cart</h1>
+      <h1 className={styles.title}>
+        Your cart
+        {itemsToBuy && itemsToBuy.length === 0 && ' is empty'}
+      </h1>
       <div className={styles.container}>
-        {cartItems && cartItems.map(({
-          id, name, price, imgSrc, quantity,
+        {itemsToBuy && itemsToBuy.map(({
+          id, name, price, imgSrc, quantity, inCart, count,
         }) => (
           <CartCard
             key={id}
@@ -25,10 +26,13 @@ const CartPage = () => {
             name={name}
             price={price}
             imgSrc={imgSrc}
+            count={count}
             quantity={quantity}
+            inCart={inCart}
           />
         ))}
       </div>
+      {itemsToBuy && itemsToBuy.length !== 0 && (
       <div className={styles.container__total}>
         <h3>
           Total price:
@@ -37,6 +41,7 @@ const CartPage = () => {
           $
         </h3>
       </div>
+      )}
     </section>
   );
 };

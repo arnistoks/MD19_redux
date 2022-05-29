@@ -74,4 +74,11 @@
   &:active {
     opacity: 1;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: darkgrey;
+    border: 1px solid grey;
+    opacity: 0.6;
+  }
 }

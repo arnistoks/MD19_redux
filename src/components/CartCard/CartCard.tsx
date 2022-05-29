@@ -2,22 +2,19 @@ import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from '../../styles/cartCard.module.scss';
 import { AppDispatch } from '../../app/store';
-import { plusItem, minusItem } from '../../reducers/cartReducer';
+import { Lawnmower } from '../../data/data';
+import {
+  increaseQuantity, decreaseQuantity, removeFromCart,
+} from '../../reducers/cartReducer';
 
-type CatalogueCardProps = {
-    id: number;
-    name: string;
-    price: number;
-    imgSrc: string;
-    quantity: number;
-}
-
-const CartCard:FC<CatalogueCardProps> = (
+const CartCard:FC<Lawnmower> = (
   {
     id, name, price, imgSrc, quantity,
   },
 ) => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const totalPrice = (price * quantity).toFixed(2);
 
   return (
     <div key={id} className={styles.card}>
@@ -36,16 +33,20 @@ const CartCard:FC<CatalogueCardProps> = (
         <div className={styles.counter}>
           <button
             className={styles.incrementOrDecrement}
-            onClick={() => dispatch(minusItem(id))}
             disabled={quantity === 1}
+            onClick={() => {
+              dispatch(decreaseQuantity(id));
+            }}
           >
             -
           </button>
           <span>{quantity}</span>
           <button
             className={styles.incrementOrDecrement}
-            onClick={() => dispatch(plusItem(id))}
             disabled={quantity === 10}
+            onClick={() => {
+              dispatch(increaseQuantity(id));
+            }}
           >
             +
           </button>
@@ -53,13 +54,13 @@ const CartCard:FC<CatalogueCardProps> = (
         <h3>
           Total:
           {' '}
-          {(price * quantity).toFixed(2)}
+          {totalPrice}
           $
         </h3>
         <button
           className={styles.delete}
           onClick={() => {
-
+            dispatch(removeFromCart(id));
           }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style={{ fill: 'rgba(0, 0, 0, 1)', transform: '', msFilter: '' }}>
