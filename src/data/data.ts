@@ -5,6 +5,7 @@ export type Lawnmower = {
   imgSrc: string;
   count: number;
   quantity: number;
+  inStorage: number;
   inCart?: boolean;
 };
 
@@ -16,6 +17,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga01_75-50.png',
     count: 1,
     quantity: 0,
+    inStorage: 20,
     inCart: false,
   },
   {
@@ -25,6 +27,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga02_130-20.png',
     count: 1,
     quantity: 0,
+    inStorage: 19,
     inCart: false,
   },
   {
@@ -34,6 +37,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga03_172-05.png',
     count: 1,
     quantity: 0,
+    inStorage: 18,
     inCart: false,
   },
   {
@@ -43,6 +47,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga04_247-00.png',
     count: 1,
     quantity: 0,
+    inStorage: 17,
     inCart: false,
   },
   {
@@ -52,6 +57,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga05_259-45.jpg',
     count: 1,
     quantity: 0,
+    inStorage: 17,
     inCart: false,
   },
   {
@@ -61,6 +67,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga06_364-00.jpg',
     count: 1,
     quantity: 0,
+    inStorage: 15,
     inCart: false,
   },
   {
@@ -70,6 +77,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga07_417-00.png',
     count: 1,
     quantity: 0,
+    inStorage: 11,
     inCart: false,
   },
   {
@@ -79,6 +87,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga08_427-80.png',
     count: 1,
     quantity: 0,
+    inStorage: 9,
     inCart: false,
   },
   {
@@ -88,6 +97,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga09_544-00.png',
     count: 1,
     quantity: 0,
+    inStorage: 7,
     inCart: false,
   },
   {
@@ -97,6 +107,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga10_585-90.png',
     count: 1,
     quantity: 0,
+    inStorage: 4,
     inCart: false,
   },
   {
@@ -106,6 +117,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga11_859-00.jpg',
     count: 1,
     quantity: 0,
+    inStorage: 2,
     inCart: false,
   },
   {
@@ -115,6 +127,7 @@ const lawnmowers: Lawnmower[] = [
     imgSrc: '/images/stiga12_1638-00.jpg',
     count: 1,
     quantity: 0,
+    inStorage: 1,
     inCart: false,
   },
 ];

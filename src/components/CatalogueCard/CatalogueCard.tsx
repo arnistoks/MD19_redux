@@ -8,7 +8,7 @@ import {
 import styles from '../../styles/catalogueCard.module.scss';
 
 const CatalogueCard:FC<Lawnmower> = ({
-  id, name, price, imgSrc, quantity, count,
+  id, name, price, imgSrc, quantity, count, inStorage,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -36,7 +36,7 @@ const CatalogueCard:FC<Lawnmower> = ({
           <span>{count}</span>
           <button
             className={styles.incrementOrDecrement}
-            disabled={count + quantity >= 10}
+            disabled={count + quantity >= inStorage}
             onClick={() => {
               dispatch(increaseCount(id));
             }}
@@ -46,7 +46,7 @@ const CatalogueCard:FC<Lawnmower> = ({
         </div>
         <button
           className={styles.add}
-          disabled={quantity >= 10}
+          disabled={quantity >= inStorage}
           onClick={() => {
             dispatch(addToCart(id));
             dispatch(resetCount(id));

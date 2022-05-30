@@ -18,7 +18,7 @@ const CartPage = () => {
       </h1>
       <div className={styles.container}>
         {itemsToBuy && itemsToBuy.map(({
-          id, name, price, imgSrc, quantity, inCart, count,
+          id, name, price, imgSrc, quantity, inCart, count, inStorage,
         }) => (
           <CartCard
             key={id}
@@ -29,6 +29,7 @@ const CartPage = () => {
             count={count}
             quantity={quantity}
             inCart={inCart}
+            inStorage={inStorage}
           />
         ))}
       </div>

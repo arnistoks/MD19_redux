@@ -9,7 +9,7 @@ import {
 
 const CartCard:FC<Lawnmower> = (
   {
-    id, name, price, imgSrc, quantity,
+    id, name, price, imgSrc, quantity, inStorage,
   },
 ) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -43,7 +43,7 @@ const CartCard:FC<Lawnmower> = (
           <span>{quantity}</span>
           <button
             className={styles.incrementOrDecrement}
-            disabled={quantity === 10}
+            disabled={quantity === inStorage}
             onClick={() => {
               dispatch(increaseQuantity(id));
             }}

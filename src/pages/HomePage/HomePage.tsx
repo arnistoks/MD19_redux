@@ -17,9 +17,9 @@ const HomePage = () => {
       <h1 className={styles.title}>Lawnmowers</h1>
       <div className={styles.container}>
         {catalogue && catalogue.slice(0, visibleItems).map(({
-          id, name, price, imgSrc, count, quantity,
+          id, name, price, imgSrc, count, quantity, inStorage,
         }) => (
-          <CatalogueCard key={id} id={id} name={name} price={price} imgSrc={imgSrc} count={count} quantity={quantity} />
+          <CatalogueCard key={id} id={id} name={name} price={price} imgSrc={imgSrc} count={count} quantity={quantity} inStorage={inStorage} />
         ))}
       </div>
       {visibleItems !== 12 && (
